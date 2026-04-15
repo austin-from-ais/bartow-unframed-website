@@ -1,0 +1,32 @@
+title: Bartow Unframed
+tagline: Public murals, brought to life.
+description: >-
+  A location-based augmented reality experience that threads together
+  four public murals across Bartow, Florida — a guided tour of the
+  city's art, people, and places. A collaboration between USF Access
+  3D Lab, the City of Bartow CRA, and Augmented Info Systems.
+
+url: "https://austin-from-ais.github.io"
+baseurl: "/bartow-unframed-website"
+
+author:
+  name: Augmented Info Systems
+  email: austin@augmentedinfosystems.com
+
+plugins:
+  - jekyll-seo-tag
+
+sass:
+  style: compressed
+  sass_dir: _sass
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - BARTOW_UNFRAMED_WEBSITE_PLAN.md
+  - design-inspirations
+  - .claude
+  - vendor
+
+permalink: /:title/

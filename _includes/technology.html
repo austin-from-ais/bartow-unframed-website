@@ -1,0 +1,70 @@
+<section class="technology" id="technology">
+  <header class="section-header">
+    <span class="label">Technology</span>
+    <h2 class="section-title">
+      Built on the same tools <em>used by museum researchers.</em>
+    </h2>
+  </header>
+
+  <dl class="tech-list">
+    <div class="tech-list__row">
+      <dt class="tech-list__term">
+        <span class="label">Positioning</span>
+        <span class="tech-list__name">Niantic Lightship VPS</span>
+      </dt>
+      <dd class="tech-list__desc">
+        Visual Positioning System that anchors AR content to real-world
+        locations with centimeter-level accuracy — the same platform behind
+        large-scale public AR deployments.
+      </dd>
+    </div>
+
+    <div class="tech-list__row">
+      <dt class="tech-list__term">
+        <span class="label">Site capture</span>
+        <span class="tech-list__name">Scaniverse + LiDAR</span>
+      </dt>
+      <dd class="tech-list__desc">
+        On-site photogrammetry and LiDAR scanning conducted at each mural
+        using USF Access 3D Lab equipment, producing precise environmental
+        models for AR anchoring.
+      </dd>
+    </div>
+
+    <div class="tech-list__row">
+      <dt class="tech-list__term">
+        <span class="label">3D &amp; interaction</span>
+        <span class="tech-list__name">Unity, C#</span>
+      </dt>
+      <dd class="tech-list__desc">
+        Each mural is a self-contained Unity scene routed from a lightweight
+        bootstrapper. Animations, audio, shaders, and depth-mask effects all
+        live inside the AR engine.
+      </dd>
+    </div>
+
+    <div class="tech-list__row">
+      <dt class="tech-list__term">
+        <span class="label">Android frontend</span>
+        <span class="tech-list__name">Kotlin, Jetpack Compose</span>
+      </dt>
+      <dd class="tech-list__desc">
+        The Android shell is a modern Compose application that hands off to
+        Unity for each AR scene, keeping the app light on devices without
+        flagship hardware.
+      </dd>
+    </div>
+
+    <div class="tech-list__row">
+      <dt class="tech-list__term">
+        <span class="label">Map</span>
+        <span class="tech-list__name">OpenStreetMap</span>
+      </dt>
+      <dd class="tech-list__desc">
+        Migrated from Google Maps to eliminate billing dependencies — a civic
+        project deserves a civic map. Custom overlays surface Bartow businesses
+        and mural sites.
+      </dd>
+    </div>
+  </dl>
+</section>

@@ -1,0 +1,212 @@
+// ============================================================
+// Layout — site chrome, hero, and section scaffolding.
+// ============================================================
+
+// --- Site header ------------------------------------------------------
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem $pad-x;
+  background: rgba(242, 238, 231, 0.82);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color $t-med $ease;
+
+  &[data-scrolled="true"] {
+    border-bottom-color: $c-rule-soft;
+  }
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: flex-start;
+  font-family: $font-display;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: $c-ink;
+
+  &:hover { opacity: 1; }
+
+  &__text {
+    display: inline-block;
+  }
+
+  &__mark {
+    font-size: 0.45em;
+    line-height: 1;
+    margin-left: 0.2em;
+    margin-top: 0.3em;
+    color: $c-mute;
+  }
+
+  &--sm { font-size: 1.1rem; }
+}
+
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-family: $font-ui;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $c-ink-soft;
+
+  a { white-space: nowrap; }
+
+  @media (max-width: $bp-md - 1) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    align-items: flex-start;
+    max-width: 60%;
+    justify-content: flex-end;
+  }
+}
+
+// --- Hero -------------------------------------------------------------
+
+.hero {
+  position: relative;
+  min-height: calc(100vh - 4rem);
+  padding: clamp(2rem, 8vh, 5rem) $pad-x clamp(3rem, 6vh, 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero__grid {
+  display: grid;
+  gap: 2rem;
+  max-width: 100%;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
+.hero__intro {
+  max-width: 34ch;
+
+  .label { margin-bottom: 0.9rem; display: block; }
+
+  p {
+    font-family: $font-ui;
+    font-size: 14px;
+    line-height: 1.6;
+    color: $c-ink-soft;
+  }
+}
+
+.hero__headline {
+  font-family: $font-display;
+  font-weight: 400;
+  font-size: clamp(3rem, 11vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: $c-ink;
+  margin-top: clamp(2rem, 8vh, 6rem);
+
+  &-row { display: block; }
+  &-row--italic {
+    font-style: italic;
+    color: $c-ink-soft;
+    padding-left: clamp(1rem, 4vw, 3rem);
+  }
+}
+
+.hero__scrollcue {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: $font-ui;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $c-mute;
+  margin-top: 3rem;
+
+  span:last-child {
+    display: inline-block;
+    transition: transform $t-med $ease;
+  }
+
+  &:hover {
+    opacity: 1;
+    span:last-child { transform: translateY(3px); }
+  }
+}
+
+// --- Generic section padding ------------------------------------------
+
+section {
+  padding-top: $pad-y;
+  padding-bottom: $pad-y;
+
+  &:first-of-type { padding-top: 0; }
+}
+
+// --- Site footer ------------------------------------------------------
+
+.site-footer {
+  border-top: 1px solid $c-rule;
+  padding: 4rem $pad-x 3rem;
+  margin-top: 4rem;
+  background: $c-bg-deep;
+}
+
+.site-footer__grid {
+  display: grid;
+  gap: 2.5rem;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.site-footer__cell {
+  .label { display: block; margin-bottom: 0.75rem; }
+
+  &--brand {
+    .wordmark { margin-bottom: 0.75rem; }
+  }
+
+  &--meta p {
+    font-size: 13px;
+    color: $c-mute;
+    margin-top: 0.75rem;
+  }
+}
+
+.site-footer__tag {
+  font-family: $font-display;
+  font-style: italic;
+  font-size: 18px;
+  color: $c-ink-soft;
+  max-width: 18ch;
+}
+
+.site-footer__list {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 14px;
+
+  a {
+    border-bottom: 1px solid transparent;
+    &:hover { border-bottom-color: $c-ink; opacity: 1; }
+  }
+}

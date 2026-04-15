@@ -1,0 +1,64 @@
+// ============================================================
+// Responsive — targeted tweaks that don't belong inside component files.
+// ============================================================
+
+@media (max-width: $bp-md - 1) {
+
+  .site-header {
+    padding: 1rem $pad-x;
+    align-items: center;
+  }
+
+  .site-nav {
+    font-size: 10px;
+    gap: 0.5rem 0.9rem;
+    max-width: 62%;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero__headline-row--italic {
+    padding-left: 2rem;
+  }
+
+  .hero__scrollcue {
+    align-self: flex-start;
+  }
+
+  .section-title em { display: inline; }
+
+  .mural-row {
+    padding-bottom: 1.5rem;
+  }
+
+  .mural-card__desc { max-width: none; }
+
+  .credit {
+    min-height: auto;
+  }
+}
+
+@media (min-width: $bp-xl) {
+
+  .hero__headline {
+    font-size: clamp(5rem, 10vw, 10.5rem);
+  }
+
+  .mural-row {
+    max-width: 100rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Print (unlikely, but cheap insurance) --------------------------------
+
+@media print {
+  .site-header, .site-footer, .mural-card__sound { display: none; }
+  body { background: #fff; color: #000; }
+  video { display: none; }
+}

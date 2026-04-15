@@ -1,0 +1,51 @@
+// ============================================================
+// Bartow Unframed — design tokens
+// Warm off-white gallery palette, editorial typographic system.
+// ============================================================
+
+// --- Color ------------------------------------------------------------
+
+$c-bg:            #f2eee7;  // bone / warm off-white
+$c-bg-deep:       #ece7dd;  // secondary surface (slightly darker)
+$c-ink:           #141312;  // near-black, warmer than pure
+$c-ink-soft:      #3a3834;
+$c-mute:          #8a857c;  // warm gray for labels
+$c-rule:          rgba(20, 19, 18, 0.14);
+$c-rule-soft:     rgba(20, 19, 18, 0.07);
+
+// accent, derived from Bartow mural energy — a warm rust
+$c-accent:        #c24a1f;
+
+// card tone placeholders (shown behind video when file not yet dropped in)
+$c-tone-flag:     #a83a2c;  // red-white-blue compressed into a warm red
+$c-tone-bee:      #d9a534;  // honey / amber
+$c-tone-heart:    #c97b8e;  // bartow flower
+$c-tone-panther:  #1f1b17;  // deep nocturne
+
+// --- Typography -------------------------------------------------------
+
+$font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+$font-sans:    'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-ui:      'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+// --- Spacing & rhythm -------------------------------------------------
+
+$pad-x:   clamp(1.25rem, 4vw, 3.5rem);
+$pad-y:   clamp(4rem, 10vh, 8rem);
+$gutter:  clamp(1rem, 2vw, 2rem);
+
+$radius:  2px;
+
+// --- Breakpoints -------------------------------------------------------
+
+$bp-sm:  480px;
+$bp-md:  768px;
+$bp-lg:  1024px;
+$bp-xl:  1280px;
+
+// --- Motion ------------------------------------------------------------
+
+$ease:    cubic-bezier(0.2, 0.7, 0.2, 1);
+$t-fast:  160ms;
+$t-med:   320ms;
+$t-slow:  600ms;

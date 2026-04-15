@@ -1,0 +1,429 @@
+// ============================================================
+// Components — mural cards, steps, tech list, credits, etc.
+// ============================================================
+
+// --- Mural row & cards ------------------------------------------------
+
+.mural-row {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding: 0 $pad-x;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: $pad-x;
+  scrollbar-width: thin;
+  scrollbar-color: $c-rule transparent;
+  padding-bottom: 1rem;
+
+  // editorial staggered row on desktop
+  @media (min-width: $bp-lg) {
+    align-items: flex-end;
+    padding-top: 4rem;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  &::-webkit-scrollbar { height: 4px; }
+  &::-webkit-scrollbar-thumb { background: $c-rule; border-radius: 2px; }
+}
+
+.mural-card {
+  flex: 0 0 78vw;
+  max-width: 380px;
+  min-width: 260px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $bp-md) {
+    flex: 0 0 44vw;
+    max-width: 340px;
+  }
+
+  @media (min-width: $bp-lg) {
+    flex: 1 1 0;
+    max-width: none;
+    min-width: 0;
+  }
+
+  // editorial stagger — each card sits at a different vertical offset
+  @media (min-width: $bp-lg) {
+    &--offset-1 { margin-top: 5rem; }
+    &--offset-2 { margin-top: 2rem; }
+    &--offset-3 { margin-top: 0;    }
+    &--offset-4 { margin-top: 3.5rem; }
+  }
+}
+
+.mural-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  font-family: $font-ui;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $c-mute;
+  position: relative;
+}
+
+.mural-card__dot { color: $c-ink; font-size: 13px; line-height: 1; }
+.mural-card__index { }
+.mural-card__corner {
+  margin-left: auto;
+  font-size: 14px;
+  color: $c-ink;
+  font-weight: 400;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $c-rule;
+  background: $c-bg;
+  transition: background $t-fast $ease, color $t-fast $ease;
+}
+
+.mural-card:hover .mural-card__corner {
+  background: $c-ink;
+  color: $c-bg;
+}
+
+.mural-card__media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  overflow: hidden;
+  background: $c-bg-deep;
+  border-radius: $radius;
+  isolation: isolate;
+
+  // tonal placeholders visible when the video has no source yet
+  &[data-tone="flag"]    { background: linear-gradient(160deg, #2b4b7a 0%, $c-tone-flag 60%, #eee6d6 100%); }
+  &[data-tone="bee"]     { background: linear-gradient(160deg, #2b1f12 0%, $c-tone-bee 70%); }
+  &[data-tone="heart"]   { background: linear-gradient(160deg, #6b4759 0%, $c-tone-heart 70%, #f0d8cb 100%); }
+  &[data-tone="panther"] { background: linear-gradient(160deg, #000 0%, $c-tone-panther 80%); }
+
+  &::after {
+    // subtle inner vignette so a missing video still feels composed
+    content: "";
+    position: absolute; inset: 0;
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.18);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.mural-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.mural-card__sound {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  background: rgba(242, 238, 231, 0.9);
+  color: $c-ink;
+  font-family: $font-ui;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: $radius;
+  opacity: 0;
+  transition: opacity $t-med $ease;
+
+  &-icon { font-size: 13px; }
+}
+
+.mural-card:hover .mural-card__sound,
+.mural-card__sound[data-active="true"] {
+  opacity: 1;
+}
+
+.mural-card__info { margin-top: 1rem; }
+
+.mural-card__title {
+  font-family: $font-display;
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.4rem;
+}
+
+.mural-card__desc {
+  font-size: 13.5px;
+  color: $c-ink-soft;
+  line-height: 1.5;
+  max-width: 36ch;
+}
+
+// --- About ------------------------------------------------------------
+
+.about {
+  padding-left: $pad-x;
+  padding-right: $pad-x;
+}
+
+.about__grid {
+  display: grid;
+  gap: 3rem;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.about__body p {
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  line-height: 1.65;
+  max-width: 56ch;
+  color: $c-ink-soft;
+  margin-bottom: 1.25em;
+}
+
+.about__stats {
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+}
+
+.about__stat {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $c-rule;
+
+  &:last-child { border-bottom: 0; padding-bottom: 0; }
+}
+
+.about__stat-num {
+  font-family: $font-display;
+  font-size: 2rem;
+  line-height: 1;
+  color: $c-ink;
+  font-weight: 500;
+}
+
+.about__stat-label {
+  font-size: 13px;
+  color: $c-ink-soft;
+  line-height: 1.45;
+  max-width: 28ch;
+  align-self: center;
+}
+
+// --- How it works -----------------------------------------------------
+
+.how-it-works {
+  background: $c-bg-deep;
+  padding-left: 0;
+  padding-right: 0;
+
+  .section-header { padding-left: $pad-x; padding-right: $pad-x; margin-left: 0; margin-right: 0; }
+}
+
+.steps {
+  display: grid;
+  gap: 0;
+  padding: 0 $pad-x;
+  border-top: 1px solid $c-rule;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step {
+  padding: 2rem 2rem 2rem 0;
+  border-bottom: 1px solid $c-rule;
+  position: relative;
+
+  @media (min-width: $bp-md) {
+    padding: 2.5rem 2rem 2.5rem 0;
+    border-right: 1px solid $c-rule;
+
+    &:nth-child(2n) { border-right: 0; }
+  }
+
+  @media (min-width: $bp-lg) {
+    border-bottom: 0;
+    border-right: 1px solid $c-rule;
+
+    &:nth-child(2n) { border-right: 1px solid $c-rule; }
+    &:last-child { border-right: 0; }
+  }
+}
+
+.step__num {
+  display: block;
+  font-family: $font-ui;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $c-mute;
+  margin-bottom: 1.25rem;
+}
+
+.step__title {
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.015em;
+}
+
+.step__desc {
+  font-size: 14px;
+  color: $c-ink-soft;
+  line-height: 1.55;
+  max-width: 32ch;
+}
+
+// --- Technology -------------------------------------------------------
+
+.technology {
+  padding-left: $pad-x;
+  padding-right: $pad-x;
+}
+
+.tech-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid $c-rule;
+}
+
+.tech-list__row {
+  display: grid;
+  gap: 1rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid $c-rule;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    padding: 2rem 0;
+  }
+}
+
+.tech-list__term {
+  display: grid;
+  gap: 0.3rem;
+  align-content: start;
+
+  .label { color: $c-mute; }
+}
+
+.tech-list__name {
+  font-family: $font-display;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: $c-ink;
+}
+
+.tech-list__desc {
+  margin: 0;
+  font-size: 15px;
+  color: $c-ink-soft;
+  line-height: 1.6;
+  max-width: 58ch;
+}
+
+// --- Credits ----------------------------------------------------------
+
+.credits {
+  padding-left: $pad-x;
+  padding-right: $pad-x;
+}
+
+.credits__grid {
+  display: grid;
+  gap: 2rem;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.credit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: $c-bg-deep;
+  border-radius: $radius;
+  position: relative;
+  min-height: 18rem;
+
+  &__role {
+    font-family: $font-ui;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $c-mute;
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  &__desc {
+    font-size: 14px;
+    color: $c-ink-soft;
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  &__link {
+    font-family: $font-ui;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $c-ink;
+    border-bottom: 1px solid $c-rule;
+    padding-bottom: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    &:hover { border-bottom-color: $c-ink; opacity: 1; }
+  }
+}
+
+.credits__note {
+  margin-top: 2.5rem;
+  font-family: $font-display;
+  font-style: italic;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: $c-ink-soft;
+  max-width: 58ch;
+  line-height: 1.55;
+}
